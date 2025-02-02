@@ -1,0 +1,4 @@
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\AV_ColonistBar\1.5\Assemblies\AV_ColonistBar.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\AV_ColonistBar\1.5\Source\AV_ColonistBar\AV_ColonistBar\obj\Debug\AV_ColonistBar.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\AV_ColonistBar\1.5\Source\AV_ColonistBar\AV_ColonistBar\obj\Debug\AV_ColonistBar.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\AV_ColonistBar\1.5\Source\AV_ColonistBar\AV_ColonistBar\obj\Debug\AV_ColonistBar.dll

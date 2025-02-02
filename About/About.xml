@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>[AV] Show Utility Apparel</name>
+	<author>Veltaris</author>
+	<supportedVersions>
+		<li>1.5</li>
+    </supportedVersions>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+			<steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
+		</li>	
+	</modDependencies>
+	<loadAfter>
+		<li>Ludeon.RimWorld</li>
+		<li>Ludeon.RimWorld.Royalty</li>
+		<li>Ludeon.RimWorld.Ideology</li>
+		<li>Ludeon.RimWorld.Biotech</li>
+		<li>brrainz.harmony</li>
+		<li>Veltaris.Framework</li>
+	</loadAfter>
+	<loadBefore>
+		
+	</loadBefore>
+	<modVersion>1.0.02</modVersion>
+    <packageId>Veltaris.ColonistBar</packageId>
+    <description>This will redraw the colonist bar to include utility apparel.</description>
+</ModMetaData>
