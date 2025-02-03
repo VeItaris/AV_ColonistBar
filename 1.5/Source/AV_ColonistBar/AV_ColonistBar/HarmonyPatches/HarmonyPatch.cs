@@ -38,21 +38,10 @@ namespace AV_ColonistBar
             [HarmonyPrefix]
             public static bool Prefix(ColonistBar __instance)
             {
-                Traverse traverse = Traverse.Create(__instance);
-                //var Visible = traverse.Field("Visible").GetValue<bool>(); //always false for some reason
-                var ShowGroupFrames = traverse.Field("ShowGroupFrames").GetValue<bool>();
-                var cachedDrawLocs = traverse.Field("cachedDrawLocs").GetValue<List<Vector2>>();
-
-                var cachedReorderableGroups = traverse.Field("cachedReorderableGroups").GetValue<List<int>>();
-                var colonistsToHighlight = traverse.Field("colonistsToHighlight").GetValue<List<Pawn>>();
-
-                var WeaponIconScaleFactor = traverse.Field("WeaponIconScaleFactor").GetValue<float>();
-                var WeaponIconOffsetScaleFactor = traverse.Field("WeaponIconOffsetScaleFactor").GetValue<float>();
-                
                 //Log.Message("colonist bar: Visible :" + Visible.ToString());
                 //Log.Message("colonist bar: ShowGroupFrames :" + ShowGroupFrames.ToString());
 
-                if (!AV_Visible)
+                if (!__instance.Visible)
                 {
                     //Log.Message("colonist bar not visible, skipping");
                     return false;   //skip original
@@ -62,11 +51,11 @@ namespace AV_ColonistBar
                     //Log.Message("colonist bar not layout");
                     List<ColonistBar.Entry> entries = __instance.Entries;
                     int num = -1;
-                    bool showGroupFrames = ShowGroupFrames;
+                    bool showGroupFrames = __instance.ShowGroupFrames;
                     int value = -1;
-                    for (int i = 0; i < cachedDrawLocs.Count; i++)
+                    for (int i = 0; i < __instance.cachedDrawLocs.Count; i++)
                     {
-                        Rect rect = new Rect(cachedDrawLocs[i].x, cachedDrawLocs[i].y, __instance.Size.x, __instance.Size.y);
+                        Rect rect = new Rect(__instance.cachedDrawLocs[i].x, __instance.cachedDrawLocs[i].y, __instance.Size.x, __instance.Size.y);
                         ColonistBar.Entry entry = entries[i];
                         bool flag = num != entry.group;
                         num = entry.group;
@@ -76,12 +65,12 @@ namespace AV_ColonistBar
                             {
                                 value = ReorderableWidget.NewGroup(entry.reorderAction, ReorderableDirection.Horizontal, new Rect(0f, 0f, UI.screenWidth, UI.screenHeight), __instance.SpaceBetweenColonistsHorizontal, entry.extraDraggedItemOnGUI);
                             }
-                            cachedReorderableGroups[i] = value;
+                            __instance.cachedReorderableGroups[i] = value;
                         }
                         bool reordering;
                         if (entry.pawn != null)
                         {
-                            __instance.drawer.HandleClicks(rect, entry.pawn, cachedReorderableGroups[i], out reordering);
+                            __instance.drawer.HandleClicks(rect, entry.pawn, __instance.cachedReorderableGroups[i], out reordering);
                         }
                         else
                         {
@@ -97,7 +86,7 @@ namespace AV_ColonistBar
                         }
                         if (entry.pawn != null)
                         {
-                            __instance.drawer.DrawColonist(rect, entry.pawn, entry.map, colonistsToHighlight.Contains(entry.pawn), reordering);
+                            __instance.drawer.DrawColonist(rect, entry.pawn, entry.map, __instance.colonistsToHighlight.Contains(entry.pawn), reordering);
 
                             ThingWithComps thingWithComps = entry.pawn.equipment?.Primary;
                             ThingWithComps thingWithComps_2 = GetUtilityApparel(entry.pawn);
@@ -111,18 +100,18 @@ namespace AV_ColonistBar
 
                             if ((Prefs.ShowWeaponsUnderPortraitMode == ShowWeaponsUnderPortraitMode.Always || (Prefs.ShowWeaponsUnderPortraitMode == ShowWeaponsUnderPortraitMode.WhileDrafted && entry.pawn.Drafted)) && thingWithComps != null && thingWithComps.def.IsWeapon)
                             {
-                                Widgets.ThingIcon(new Rect(rect.x - offset, rect.y + rect.height * WeaponIconOffsetScaleFactor, rect.width, rect.height).ScaledBy(WeaponIconScaleFactor), thingWithComps, 1f, null, stackOfOne: true);
+                                Widgets.ThingIcon(new Rect(rect.x - offset, rect.y + rect.height * ColonistBar.WeaponIconOffsetScaleFactor, rect.width, rect.height).ScaledBy(ColonistBar.WeaponIconScaleFactor), thingWithComps, 1f, null, stackOfOne: true);
                             }
                             if ((Prefs.ShowWeaponsUnderPortraitMode == ShowWeaponsUnderPortraitMode.Always || (Prefs.ShowWeaponsUnderPortraitMode == ShowWeaponsUnderPortraitMode.WhileDrafted && entry.pawn.Drafted)) && thingWithComps_2 != null)
                             {
-                                Widgets.ThingIcon(new Rect(rect.x + offset, rect.y + rect.height * WeaponIconOffsetScaleFactor, rect.width, rect.height).ScaledBy(WeaponIconScaleFactor), thingWithComps_2, 1f, null, stackOfOne: true);
+                                Widgets.ThingIcon(new Rect(rect.x + offset, rect.y + rect.height * ColonistBar.WeaponIconOffsetScaleFactor, rect.width, rect.height).ScaledBy(ColonistBar.WeaponIconScaleFactor), thingWithComps_2, 1f, null, stackOfOne: true);
                             }
                         }
                     }
                     num = -1;
                     if (showGroupFrames)
                     {
-                        for (int j = 0; j < cachedDrawLocs.Count; j++)
+                        for (int j = 0; j < __instance.cachedDrawLocs.Count; j++)
                         {
                             ColonistBar.Entry entry2 = entries[j];
                             bool num2 = num != entry2.group;
@@ -137,7 +126,7 @@ namespace AV_ColonistBar
                 if (Event.current.type == EventType.Repaint)
                 {
                    // Log.Message("colonist bar Repaint");
-                    colonistsToHighlight.Clear();
+                    __instance.colonistsToHighlight.Clear();
                 }
                 //Log.Message("applied harmony colonist bar");
                 return false;   //skip original
@@ -204,24 +193,6 @@ namespace AV_ColonistBar
                 }
                 return null;
             }
-
-
-            private static bool AV_Visible
-            {
-                get
-                {
-                    if (UI.screenWidth < 800 || UI.screenHeight < 500)
-                    {
-                        return false;
-                    }
-                    if (Find.TilePicker.Active)
-                    {
-                        return false;
-                    }
-                    return true;
-                }
-            }
-
         }
     }
 
