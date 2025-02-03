@@ -27,6 +27,17 @@ namespace AV_ColonistBar
         }
     }
 
+    [DefOf]
+    public static class ThingCategoryDefOf
+    {
+        public static ThingCategoryDef ApparelUtility;
+
+        static ThingCategoryDefOf()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(ThingCategoryDefOf));
+        }
+    }
+
     [StaticConstructorOnStartup]
     public static class ColonistBar_ColonistBarOnGUI_Patch
     {
@@ -110,11 +121,11 @@ namespace AV_ColonistBar
 
             private static ThingWithComps GetUtilityApparel(Pawn pawn)
             {
-                ThingCategoryDef ApparelUtility = DefDatabase<ThingCategoryDef>.GetNamed("ApparelUtility");
+                ThingCategoryDef ApparelUtility = ThingCategoryDefOf.ApparelUtility;
 
-                ApparelLayerDef BeltLayer = DefDatabase<ApparelLayerDef>.GetNamed("Belt");
+                ApparelLayerDef BeltLayer = ApparelLayerDefOf.Belt;
 
-                BodyPartDef torsobodyPart = DefDatabase<BodyPartDef>.GetNamed("Torso");
+                BodyPartDef torsobodyPart = BodyPartDefOf.Torso;
 
 
                 if (ApparelUtility != null && pawn.apparel?.WornApparel != null)
