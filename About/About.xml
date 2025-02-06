@@ -24,7 +24,7 @@
 	<loadBefore>
 		
 	</loadBefore>
-	<modVersion>1.0.02</modVersion>
+	<modVersion>1.01.00</modVersion>
     <packageId>Veltaris.ColonistBar</packageId>
-    <description>This will redraw the colonist bar to include utility apparel.</description>
+    <description>This will redraw the icons below the colonist bar to include utility apparel.</description>
 </ModMetaData>

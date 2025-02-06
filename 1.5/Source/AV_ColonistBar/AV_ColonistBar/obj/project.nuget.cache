@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "sX3GSFEBIENGExfClHsKJ2pClAXGu3h3G0sQQhKeXB9WNtqJ+FXgzD51z4x/jCPwvFTlO4+YQb8KNK2lhtaoQQ==",
+  "success": true,
+  "projectFilePath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_ColonistBar\\1.5\\Source\\AV_ColonistBar\\AV_ColonistBar\\AV_ColonistBar.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\damnw\\.nuget\\packages\\krafs.publicizer\\2.3.0\\krafs.publicizer.2.3.0.nupkg.sha512",
+    "C:\\Users\\damnw\\.nuget\\packages\\krafs.rimworld.ref\\1.5.4297\\krafs.rimworld.ref.1.5.4297.nupkg.sha512",
+    "C:\\Users\\damnw\\.nuget\\packages\\lib.harmony\\2.3.4\\lib.harmony.2.3.4.nupkg.sha512"
+  ],
+  "logs": []
+}
